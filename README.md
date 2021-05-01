@@ -1,10 +1,10 @@
-# Are u ok(jue
+# Are u ok(jue）
 > 东北大学学生防控信息统计系统自动化打卡脚本
 
 
 ## 目录
 
-- [Are u ok(jue](#are-u-okjue)
+- [Are u ok(jue）](#are-u-okjue)
   - [目录](#目录)
   - [使用须知](#使用须知)
   - [功能](#功能)
