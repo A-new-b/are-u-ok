@@ -110,7 +110,7 @@ class Job:
 
     # property 不好看
     def _is_reported(self) -> bool:
-        return self._date == time.strftime(r'%Y-%m-%d', time.localtime())
+        return self._date == datetime.utcnow().replace(tzinfo=shanghai_tz).strftime(r'%Y-%m-%d')
 
     @staticmethod
     def _unexpected_exception(error: Exception = None) -> str:
@@ -185,7 +185,7 @@ class Job:
             return False, self._unexpected_exception(e)
 
     def do(self, notifier: Notifier):
-        today = time.strftime('%m/%d/%Y')
+        today = datetime.utcnow().replace(tzinfo=shanghai_tz).strftime(r'%Y-%m-%d')
 
         # 登陆
         success, msg = self._login()
@@ -208,8 +208,11 @@ class Job:
             success, msg = self._update_info()
             if not success:
                 notifier.send(f"{today} 打卡失败", msg)
+
                 return
             notifier.send(f"{today} 打卡成功", "I'm fine, thank you.")
+        else:
+            notifier.send(notifier.send(f"{today}已打卡", msg))
 
         # 上报体温
         success, msg = self._report_body_temperature()
