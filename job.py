@@ -212,7 +212,7 @@ class Job:
                 return
             notifier.send(f"{today} 打卡成功", "I'm fine, thank you.")
         else:
-            notifier.send(notifier.send(f"{today}已打卡", msg))
+            notifier.send(f"{today}已打卡", msg)
 
         # 上报体温
         success, msg = self._report_body_temperature()
