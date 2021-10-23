@@ -110,7 +110,7 @@ class Job:
 
     # property 不好看
     def _is_reported(self) -> bool:
-        return self._date == datetime.utcnow().replace(tzinfo=shanghai_tz).strftime(r'%Y-%m-%d')
+        return self._date == datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(tz=shanghai_tz).strftime(r'%Y-%m-%d')
 
     @staticmethod
     def _unexpected_exception(error: Exception = None) -> str:
@@ -185,7 +185,7 @@ class Job:
             return False, self._unexpected_exception(e)
 
     def do(self, notifier: Notifier):
-        today = datetime.utcnow().replace(tzinfo=shanghai_tz).strftime(r'%Y-%m-%d')
+        today = datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(tz=shanghai_tz).strftime(r'%Y-%m-%d')
 
         # 登陆
         success, msg = self._login()
